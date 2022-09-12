@@ -5,16 +5,39 @@ const context = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-context.fillRect(210 - 40, 200 - 30, 15, 100);
-context.fillRect(350 - 40, 200 - 30, 15, 100);
-context.fillRect(260 - 40, 200 - 30, 60, 200);
+context.lineWidth = 2;
+let isPainting = false;
 
-context.arc(250, 100, 50, 0, 2 * Math.PI);
-context.fill();
+const colors = [
+    "#ff3838",
+    "#ffb8b8",
+    "#c56cf0",
+    "#ff9f1a",
+    "#fff200",
+    "#32ff7e",
+    "#7efff5",
+    "#18dcff",
+    "#7d5fff"
+];
 
-context.beginPath();
-context.fillStyle = "white";
-context.arc(260 + 10, 80, 8, Math.PI, 2 * Math.PI);
-context.arc(220 + 10, 80, 8, Math.PI, 2 * Math.PI);
-context.fill();
+function onMove(event) {
+    if (isPainting) {
+        context.lineTo(event.offsetX, event.offsetY);
+        context.stroke();
+        return;
+    }
+    context.moveTo(event.offsetX, event.offsetY);
+
+}
+function onmousedown() {
+    isPainting = true;
+}
+
+function cancle() {
+    isPainting = false;
+}
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", onmousedown);
+canvas.addEventListener("mouseup", cancle);
+canvas.addEventListener("mouseleave", cancle);
 // 항상 마지막에 채워줘야 함.
