@@ -5,16 +5,16 @@ const context = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-context.fillRect(200, 200, 50, 200);
-context.fillRect(400, 200, 50, 200);
-context.lineWidth = 2;
-context.strokeRect(300, 300, 50, 100);
-context.fillRect(200, 200, 200, 20);
-context.moveTo(200, 200);
-context.lineTo(325, 100);
-context.lineTo(425, 200);
-context.stroke()
+context.fillRect(210 - 40, 200 - 30, 15, 100);
+context.fillRect(350 - 40, 200 - 30, 15, 100);
+context.fillRect(260 - 40, 200 - 30, 60, 200);
 
+context.arc(250, 100, 50, 0, 2 * Math.PI);
+context.fill();
 
-// 비어있던 공간에서 4.5초뒤 context fill을 한다
-// 모든경로의 선을 채워버리기 때문에 모두 red가 됨 그러므로 beginPath()로 새 경로를 만들어서 연결을 끊어줌
+context.beginPath();
+context.fillStyle = "white";
+context.arc(260 + 10, 80, 8, Math.PI, 2 * Math.PI);
+context.arc(220 + 10, 80, 8, Math.PI, 2 * Math.PI);
+context.fill();
+// 항상 마지막에 채워줘야 함.
