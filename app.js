@@ -5,13 +5,15 @@ const context = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-context.moveTo(50, 50);
-context.lineTo(150, 50);
-context.lineTo(150, 150);
-context.lineTo(50, 150);
-context.lineTo(50, 50);
-context.stroke();
-context.fill();
+context.fillRect(200, 200, 50, 200);
+context.fillRect(400, 200, 50, 200);
+context.lineWidth = 2;
+context.strokeRect(300, 300, 50, 100);
+context.fillRect(200, 200, 200, 20);
+context.moveTo(200, 200);
+context.lineTo(325, 100);
+context.lineTo(425, 200);
+context.stroke()
 
 
 // 비어있던 공간에서 4.5초뒤 context fill을 한다
