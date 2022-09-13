@@ -17,6 +17,7 @@ const eraseBtn = document.getElementById("eraser-btn");
 const imageFile = document.getElementById("file");
 const textInput = document.getElementById("text");
 context.lineCap = "round";
+const saveBtn = document.getElementById("save");
 function onColorClick(event) {
     context.strokeStyle = event.target.dataset.color;
     context.fillStyle = event.target.dataset.color;
@@ -107,7 +108,13 @@ function onDoubleClick(event) {
         // save와 restore 사이에서는 어떤 수정을 하던 간 저장되지 않음
     }
 }
-
+function onSaveClick() {
+    const url = canvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "myDrawing.png"
+    a.click();
+}
 // canvas.onmousemove = function(){
 
 // } = canvas.addEventListener("mousemove", onMove);
@@ -124,4 +131,5 @@ destroyBtn.addEventListener("click", onDestroyClick);
 eraseBtn.addEventListener("click", onEraserClick);
 imageFile.addEventListener("change", onImageFileChange);
 canvas.addEventListener("dblclick", onDoubleClick);
+saveBtn.addEventListener("click", onSaveClick);
 // 항상 마지막에 채워줘야 함.
