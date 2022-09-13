@@ -14,8 +14,9 @@ context.lineWidth = lineWidth.value;
 let isPainting = false;
 let isFilling = false;
 const eraseBtn = document.getElementById("eraser-btn");
-
-
+const imageFile = document.getElementById("file");
+const textInput = document.getElementById("text");
+context.lineCap = "round";
 function onColorClick(event) {
     context.strokeStyle = event.target.dataset.color;
     context.fillStyle = event.target.dataset.color;
@@ -76,6 +77,40 @@ function onEraserClick() {
     modeBtn.innerText = "Fill";
 }
 
+function onImageFileChange(event) {
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    // <img src=""/>
+    image.src = url;
+    image.onload = function () {
+        context.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        imageFile.value = null;
+        // image객체가 생성되어 속성들을 추가할수 있음
+
+        // new Image(width, height); 파라미터를 넣어 미리 크기를 지정 가능
+        // null 함으로서 새로 image 추가할수있는 공간 마련
+    }
+}
+function onDoubleClick(event) {
+    context.save();
+
+    // save는 ctx의 현재상태 색상 스타일등을 저장하는 함수
+    const text = textInput.value;
+    if (text !== "") {
+        context.lineWidth = 1;
+        context.font = "68px serif";
+        // size , font-family
+        context.fillText(text, event.offsetX, event.offsetY);
+
+        context.restore();
+        // save와 restore 사이에서는 어떤 수정을 하던 간 저장되지 않음
+    }
+}
+
+// canvas.onmousemove = function(){
+
+// } = canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("click", onCanvasClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onmousedown);
@@ -87,4 +122,6 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraseBtn.addEventListener("click", onEraserClick);
+imageFile.addEventListener("change", onImageFileChange);
+canvas.addEventListener("dblclick", onDoubleClick);
 // 항상 마지막에 채워줘야 함.
