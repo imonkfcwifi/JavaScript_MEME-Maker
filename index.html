@@ -10,9 +10,7 @@
 </head>
 
 <body>
-    <canvas></canvas>
-    <input id="line-width" type="range" min="1" max="10" value="5" step="0.1">
-    <div>
+    <div class="color-options">
         <input type="color" id="color" />
         <div class="color-option" style="background-color: #1abc9c" data-color="#1abc9c"></div>
         <div class="color-option" style="background-color: #3498db" data-color="#3498db"></div>
@@ -27,14 +25,15 @@
         <div class="color-option" style="background-color: #2ecc71" data-color="#2ecc71"></div>
         <div class="color-option" style="background-color: #e67e22" data-color="#e67e22"></div>
     </div>
-    <div>
-        <button id="mode-btn">Fill</button>
-        <button id="des-btn">destroy</button>
-        <button id="eraser-btn">Erase</button>
+    <canvas></canvas>
+    <div class="btns"> <input id="line-width" type="range" min="1" max="10" value="5" step="0.1">
+        <button id="mode-btn">채우기🌎</button>
+        <button id="des-btn">초기화🧹</button>
+        <button id="eraser-btn">지우개🧽</button>
+        <input type="file" accept="image/*" id="file" />
+        <input type="text" placeholder="텍스트 입력후 더블클릭시 생성👨‍🎓" id="text" />
+        <button id="save">짤방 저장🧷</button>
     </div>
-    <input type="file" accept="image/*" id="file" />
-    <input type="text" placeholder="텍스트 입력시 더블클릭" id="text" />
-    <button id="save">Save Image</button>
     <script src="app.js"></script>
 </body>
 
